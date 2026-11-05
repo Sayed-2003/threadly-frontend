@@ -6,9 +6,11 @@ import Homepage from "./pages/Homepage";
 import SignInPage from "./pages/SigninPage";
 import Dashboard from "./pages/Dashboard";
 import { logout } from "./services/authService";
+import AllCommunities from "./pages/communities/AllCommunities";
+import CommunityDetails from "./pages/communities/CommunityDetails";
 
 function App() {
-  function  getUserFromToken (){
+  function getUserFromToken() {
     const token = localStorage.getItem("token");
 
     if (!token) return null;
@@ -34,6 +36,11 @@ function App() {
         <Route
           path="/dashboard"
           element={user ? <Dashboard user={user} /> : <Navigate to="/sign-in" />}
+        />
+        <Route path="/communities" element={<AllCommunities />} />
+        <Route
+          path="/communities/:communityId"
+          element={<CommunityDetails />}
         />
       </Routes>
     </div>
