@@ -1,21 +1,33 @@
-import { Link } from 'react-router'
+import { Link } from "react-router";
 
-function Navbar({ user, handleLogout }) {
+function Navbar({ user, handleLogout, onCreateCommunity }) {
   return (
     <nav>
-      <Link to='/'>Homepage</Link>
-      {user 
-      ? 
-      (<>
-        <Link to='/dashboard'>Dashboard</Link>
-      <button onClick={handleLogout}>Sign Out</button>
-      </>) : 
-      (<>
-        <Link to='/sign-up'>Sign Up</Link>
-        <Link to='/sign-in'>Sign In</Link>
-      </>)}
+      <Link to="/">threadly</Link>
+      <Link to="/communities">Communities</Link>
+
+      {user ? (
+        <>
+          <Link to="/dashboard">Dashboard</Link>
+
+          <button type="button" onClick={onCreateCommunity}>
+            Create Community
+          </button>
+
+          <span>{user.username}</span>
+
+          <button type="button" onClick={handleLogout}>
+            Sign Out
+          </button>
+        </>
+      ) : (
+        <>
+          <Link to="/sign-up">Sign Up</Link>
+          <Link to="/sign-in">Sign In</Link>
+        </>
+      )}
     </nav>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
