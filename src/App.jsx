@@ -9,6 +9,7 @@ import { logout } from "./services/authService";
 import AllCommunities from "./pages/communities/AllCommunities";
 import CommunityDetails from "./pages/communities/CommunityDetails";
 import CreateCommunityModal from "./components/communities/CreateCommunityModal";
+import EditCommunity from "./pages/communities/EditCommunity";
 
 
 function App() {
@@ -54,6 +55,10 @@ function App() {
         <Route
           path="/communities/:communityId"
           element={<CommunityDetails user={user} />}
+        />
+        <Route
+          path="/communities/:communityId/edit"
+          element={user ? <EditCommunity user={user} /> : <Navigate to="/sign-in" />}
         />
       </Routes>
     </div>
