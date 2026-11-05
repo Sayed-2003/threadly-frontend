@@ -40,7 +40,7 @@ function App() {
         <Route path="/communities" element={<AllCommunities />} />
         <Route
           path="/communities/:communityId"
-          element={<CommunityDetails />}
+          element={<CommunityDetails user={user} />}
         />
       </Routes>
     </div>
