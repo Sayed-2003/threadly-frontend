@@ -8,6 +8,8 @@ import Dashboard from "./pages/Dashboard";
 import { logout } from "./services/authService";
 import AllCommunities from "./pages/communities/AllCommunities";
 import CommunityDetails from "./pages/communities/CommunityDetails";
+import CreateCommunityModal from "./components/communities/CreateCommunityModal";
+
 
 function App() {
   function getUserFromToken() {
@@ -20,15 +22,26 @@ function App() {
 
 
   const [user, setUser] = useState(getUserFromToken());
+  const [showCreateCommunity, setShowCreateCommunity] = useState(false);
 
   function handleLogout() {
     logout();
     setUser(null);
+    setShowCreateCommunity(false);
   }
 
   return (
     <div>
-      <Navbar user={user} handleLogout={handleLogout} />
+      <Navbar
+        user={user}
+        handleLogout={handleLogout}
+        onCreateCommunity={() => setShowCreateCommunity(true)}
+      />
+      {user && showCreateCommunity && (
+      <CreateCommunityModal
+        onClose={() => setShowCreateCommunity(false)}
+      />
+    )}
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/sign-up" element={<SignupPage />} />
