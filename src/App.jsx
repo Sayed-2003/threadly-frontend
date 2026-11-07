@@ -13,6 +13,7 @@ import EditCommunity from "./pages/communities/EditCommunity";
 import AllPosts from "./pages/posts/AllPosts";
 import PostDetails from "./pages/posts/PostDetails";
 import CreatePost from "./pages/posts/CreatePost";
+import EditPost from "./pages/posts/EditPost";
 
 
 
@@ -65,11 +66,20 @@ function App() {
           element={user ? <EditCommunity user={user} /> : <Navigate to="/sign-in" />}
         />
         <Route path="/posts" element={<AllPosts />} />
-        <Route path="/posts/:postId" element={<PostDetails />} />
+        <Route
+          path="/posts/:postId"
+          element={<PostDetails user={user} />}
+        />
         <Route
           path="/communities/:communityId/posts/create"
           element={
             user ? <CreatePost user={user} /> : <Navigate to="/sign-in" />
+          }
+        />
+        <Route
+          path="/posts/:postId/edit"
+          element={
+            user ? <EditPost user={user} /> : <Navigate to="/sign-in" />
           }
         />
       </Routes>
