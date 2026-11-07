@@ -6,12 +6,17 @@ import {
   leaveCommunity,
   deleteCommunityById,
 } from "../../services/communityService";
+import { getPostsByCommunity } from "../../services/postService";
 
 function CommunityDetails({ user }) {
   const [community, setCommunity] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+
+  const [posts, setPosts] = useState([]);
+  const [postsError, setPostsError] = useState("");
+  const [postsLoading, setPostsLoading] = useState(true);
 
   const { communityId } = useParams();
   const navigate = useNavigate();
@@ -33,8 +38,26 @@ function CommunityDetails({ user }) {
     }
   }
 
+  async function loadCommunityPosts() {
+    try {
+      setPostsLoading(true);
+      setPostsError("");
+      setPosts([]);
+
+      const response = await getPostsByCommunity(communityId);
+      setPosts(response);
+    } catch (err) {
+      setPostsError(
+        err?.response?.data?.message || "Could not load community posts"
+      );
+    } finally {
+      setPostsLoading(false);
+    }
+  }
+
   useEffect(() => {
     loadCommunity();
+    loadCommunityPosts();
   }, [communityId]);
 
   const isMember =
@@ -117,6 +140,12 @@ function CommunityDetails({ user }) {
           <p>{community.description}</p>
           <p>Members: {community.members.length}</p>
 
+          {user && isMember && (
+            <Link to={`/communities/${communityId}/posts/create`}>
+              Create Post
+            </Link>
+          )}
+
           {isOwner && (
             <div>
               <Link to={`/communities/${communityId}/edit`}>
@@ -155,6 +184,32 @@ function CommunityDetails({ user }) {
             <Link to="/sign-in">
               Sign in to join this community
             </Link>
+          )}
+
+          <h2>Posts</h2>
+
+          {postsError && <p role="alert">{postsError}</p>}
+
+          {postsLoading ? (
+            <p>Loading posts...</p>
+          ) : (
+            <>
+              {!postsError && posts.length === 0 && (
+                <p>No posts in this community yet.</p>
+              )}
+
+              {posts.map((onePost) => (
+                <div key={onePost._id}>
+                  <p>u/{onePost.author?.username || "Unknown user"}</p>
+
+                  <Link to={`/posts/${onePost._id}`}>
+                    <h3>{onePost.title}</h3>
+                  </Link>
+
+                  <p>{onePost.text}</p>
+                </div>
+              ))}
+            </>
           )}
         </>
       ) : null}

@@ -10,6 +10,11 @@ import AllCommunities from "./pages/communities/AllCommunities";
 import CommunityDetails from "./pages/communities/CommunityDetails";
 import CreateCommunityModal from "./components/communities/CreateCommunityModal";
 import EditCommunity from "./pages/communities/EditCommunity";
+import AllPosts from "./pages/posts/AllPosts";
+import PostDetails from "./pages/posts/PostDetails";
+import CreatePost from "./pages/posts/CreatePost";
+import EditPost from "./pages/posts/EditPost";
+
 
 
 function App() {
@@ -39,10 +44,10 @@ function App() {
         onCreateCommunity={() => setShowCreateCommunity(true)}
       />
       {user && showCreateCommunity && (
-      <CreateCommunityModal
-        onClose={() => setShowCreateCommunity(false)}
-      />
-    )}
+        <CreateCommunityModal
+          onClose={() => setShowCreateCommunity(false)}
+        />
+      )}
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/sign-up" element={<SignupPage />} />
@@ -59,6 +64,23 @@ function App() {
         <Route
           path="/communities/:communityId/edit"
           element={user ? <EditCommunity user={user} /> : <Navigate to="/sign-in" />}
+        />
+        <Route path="/posts" element={<AllPosts />} />
+        <Route
+          path="/posts/:postId"
+          element={<PostDetails user={user} />}
+        />
+        <Route
+          path="/communities/:communityId/posts/create"
+          element={
+            user ? <CreatePost user={user} /> : <Navigate to="/sign-in" />
+          }
+        />
+        <Route
+          path="/posts/:postId/edit"
+          element={
+            user ? <EditPost user={user} /> : <Navigate to="/sign-in" />
+          }
         />
       </Routes>
     </div>
