@@ -11,6 +11,7 @@ import CommunityDetails from "./pages/communities/CommunityDetails";
 import CreateCommunityModal from "./components/communities/CreateCommunityModal";
 import EditCommunity from "./pages/communities/EditCommunity";
 import AllPosts from "./pages/posts/AllPosts";
+import PostDetails from "./pages/posts/PostDetails";
 
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
           element={user ? <EditCommunity user={user} /> : <Navigate to="/sign-in" />}
         />
         <Route path="/posts" element={<AllPosts />} />
+        <Route path="/posts/:postId" element={<PostDetails />} />
       </Routes>
     </div>
   );
