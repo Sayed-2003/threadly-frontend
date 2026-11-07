@@ -1,9 +1,8 @@
+
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router";
-import {
-  getPostById,
-  deletePostById,
-} from "../../services/postService";
+import { getPostById,deletePostById,} from "../../services/postService";
+import CommentsSection from "../../components/comments/CommentsSection";
 
 function PostDetails({ user }) {
   const [post, setPost] = useState(null);
@@ -108,6 +107,12 @@ function PostDetails({ user }) {
               <p>Score: {votes.score}</p>
             </div>
           )}
+
+          <CommentsSection
+            postId={postId}
+            user={user}
+            communityId={post.community._id}
+          />
         </>
       ) : null}
     </div>
