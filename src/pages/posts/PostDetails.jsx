@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router";
 import { getPostById,deletePostById,} from "../../services/postService";
 import CommentsSection from "../../components/comments/CommentsSection";
+import VoteButtons from "../../components/votes/VoteButtons";
 
 function PostDetails({ user }) {
   const [post, setPost] = useState(null);
-  const [votes, setVotes] = useState(null);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState("");
@@ -19,12 +19,10 @@ function PostDetails({ user }) {
       setLoading(true);
       setError("");
       setPost(null);
-      setVotes(null);
 
       const response = await getPostById(postId);
 
       setPost(response.post);
-      setVotes(response.votes);
     } catch (err) {
       setError(
         err?.response?.data?.message || "Could not load post"
@@ -100,13 +98,7 @@ function PostDetails({ user }) {
             </div>
           )}
 
-          {votes && (
-            <div>
-              <p>Upvotes: {votes.upvotes}</p>
-              <p>Downvotes: {votes.downvotes}</p>
-              <p>Score: {votes.score}</p>
-            </div>
-          )}
+          <VoteButtons postId={postId} user={user} />
 
           <CommentsSection
             postId={postId}
