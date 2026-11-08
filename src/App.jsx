@@ -14,6 +14,7 @@ import AllPosts from "./pages/posts/AllPosts";
 import PostDetails from "./pages/posts/PostDetails";
 import CreatePost from "./pages/posts/CreatePost";
 import EditPost from "./pages/posts/EditPost";
+import BookmarksPage from "./pages/bookmarks/BookmarksPage";
 
 
 
@@ -80,6 +81,12 @@ function App() {
           path="/posts/:postId/edit"
           element={
             user ? <EditPost user={user} /> : <Navigate to="/sign-in" />
+          }
+        />
+        <Route
+          path="/bookmarks"
+          element={
+            user ? <BookmarksPage user={user} /> : <Navigate to="/sign-in" />
           }
         />
       </Routes>

@@ -4,6 +4,7 @@ import { Link, useParams, useNavigate } from "react-router";
 import { getPostById,deletePostById,} from "../../services/postService";
 import CommentsSection from "../../components/comments/CommentsSection";
 import VoteButtons from "../../components/votes/VoteButtons";
+import BookmarkButton from "../../components/bookmarks/BookmarkButton";
 
 function PostDetails({ user }) {
   const [post, setPost] = useState(null);
@@ -99,6 +100,8 @@ function PostDetails({ user }) {
           )}
 
           <VoteButtons postId={postId} user={user} />
+
+          <BookmarkButton postId={postId} user={user} />
 
           <CommentsSection
             postId={postId}

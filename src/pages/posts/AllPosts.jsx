@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router";
 import { getAllPosts } from "../../services/postService";
-import VoteButtons from "../../components/votes/VoteButtons";
+import PostCard from "../../components/posts/PostCard";
 
 function AllPosts({ user }) {
   const [posts, setPosts] = useState([]);
@@ -38,21 +37,7 @@ function AllPosts({ user }) {
           {!error && posts.length === 0 && <p>No posts yet.</p>}
 
           {posts.map((onePost) => (
-            <div key={onePost._id}>
-              <Link to={`/communities/${onePost.community._id}`}>
-                r/{onePost.community.name}
-              </Link>
-
-              <p>u/{onePost.author?.username || "Unknown user"}</p>
-
-              <Link to={`/posts/${onePost._id}`}>
-                <h2>{onePost.title}</h2>
-              </Link>
-
-              <p>{onePost.text}</p>
-
-              <VoteButtons postId={onePost._id} user={user} />
-            </div>
+            <PostCard key={onePost._id} post={onePost} user={user} />
           ))}
         </>
       )}
