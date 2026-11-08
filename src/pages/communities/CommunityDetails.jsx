@@ -7,7 +7,7 @@ import {
   deleteCommunityById,
 } from "../../services/communityService";
 import { getPostsByCommunity } from "../../services/postService";
-import VoteButtons from "../../components/votes/VoteButtons";
+import PostCard from "../../components/posts/PostCard";
 
 function CommunityDetails({ user }) {
   const [community, setCommunity] = useState(null);
@@ -200,17 +200,12 @@ function CommunityDetails({ user }) {
               )}
 
               {posts.map((onePost) => (
-                <div key={onePost._id}>
-                  <p>u/{onePost.author?.username || "Unknown user"}</p>
-
-                  <Link to={`/posts/${onePost._id}`}>
-                    <h3>{onePost.title}</h3>
-                  </Link>
-
-                  <p>{onePost.text}</p>
-
-                  <VoteButtons postId={onePost._id} user={user} />
-                </div>
+                <PostCard
+                  key={onePost._id}
+                  post={onePost}
+                  user={user}
+                  showCommunity={false}
+                />
               ))}
             </>
           )}

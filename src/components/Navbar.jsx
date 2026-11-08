@@ -9,6 +9,7 @@ function Navbar({ user, handleLogout, onCreateCommunity }) {
       {user ? (
         <>
           <Link to="/dashboard">Dashboard</Link>
+          <Link to="/bookmarks">Bookmarks</Link>
 
           <button type="button" onClick={onCreateCommunity}>
             Create Community
