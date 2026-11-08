@@ -65,7 +65,7 @@ function App() {
           path="/communities/:communityId/edit"
           element={user ? <EditCommunity user={user} /> : <Navigate to="/sign-in" />}
         />
-        <Route path="/posts" element={<AllPosts />} />
+        <Route path="/posts" element={<AllPosts user={user} />} />
         <Route
           path="/posts/:postId"
           element={<PostDetails user={user} />}

@@ -7,6 +7,7 @@ import {
   deleteCommunityById,
 } from "../../services/communityService";
 import { getPostsByCommunity } from "../../services/postService";
+import VoteButtons from "../../components/votes/VoteButtons";
 
 function CommunityDetails({ user }) {
   const [community, setCommunity] = useState(null);
@@ -207,6 +208,8 @@ function CommunityDetails({ user }) {
                   </Link>
 
                   <p>{onePost.text}</p>
+
+                  <VoteButtons postId={onePost._id} user={user} />
                 </div>
               ))}
             </>

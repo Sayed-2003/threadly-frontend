@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { getAllPosts } from "../../services/postService";
+import VoteButtons from "../../components/votes/VoteButtons";
 
-function AllPosts() {
+function AllPosts({ user }) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -49,6 +50,8 @@ function AllPosts() {
               </Link>
 
               <p>{onePost.text}</p>
+
+              <VoteButtons postId={onePost._id} user={user} />
             </div>
           ))}
         </>
