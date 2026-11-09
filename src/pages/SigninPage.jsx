@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import { signIn } from '../services/authService';
+import toast from 'react-hot-toast';
 
 
 const SignInForm = ({ setUser }) => {
@@ -24,6 +25,7 @@ const SignInForm = ({ setUser }) => {
       const signedInUser = await signIn(formData);
 
       setUser(signedInUser);
+      toast.success('Signed in successfully!');
       navigate('/dashboard');
     } catch (err) {
       setError(err?.response?.data?.message || 'Unable to sign in. Please try again.');

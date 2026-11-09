@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { createNewPost } from "../../services/postService";
 import { getCommunityById } from "../../services/communityService";
+import toast from "react-hot-toast";
 
 function CreatePost({ user }) {
   const [community, setCommunity] = useState(null);
@@ -9,6 +10,8 @@ function CreatePost({ user }) {
     title: "",
     text: "",
   });
+
+
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -66,13 +69,14 @@ function CreatePost({ user }) {
         text: formData.text,
         community: communityId,
       });
+      toast.success("Post created successfully!");
 
       navigate(`/posts/${newPost._id}`);
     } catch (err) {
       setError(
         err?.response?.data?.message ||
-          err?.response?.data?.err ||
-          "Could not create post"
+        err?.response?.data?.err ||
+        "Could not create post"
       );
     } finally {
       setSubmitting(false);

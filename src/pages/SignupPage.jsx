@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { signUp } from "../services/authService";
+import toast from "react-hot-toast";
 
 function Signup() {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ function Signup() {
     try {
       setSubmitting(true)
       await signUp(formData);
+      toast.success("Account created successfully! Please sign in.");
       navigate('/sign-in')
     } catch (err) {
       setError(err.response.data.message);

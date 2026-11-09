@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { createNewCommunity } from "../../services/communityService";
 import "./CreateCommunityModal.css";
+import toast from "react-hot-toast";
 
 function CreateCommunityModal({ onClose }) {
   const [formData, setFormData] = useState({
@@ -29,13 +30,15 @@ function CreateCommunityModal({ onClose }) {
 
       const newCommunity = await createNewCommunity(formData);
 
+      toast.success("Community created successfully!");
+
       onClose();
       navigate(`/communities/${newCommunity._id}`);
     } catch (err) {
       setError(
         err?.response?.data?.message ||
-          err?.response?.data?.err ||
-          "Could not create community"
+        err?.response?.data?.err ||
+        "Could not create community"
       );
       setSubmitting(false);
     }

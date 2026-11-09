@@ -4,6 +4,7 @@ import {
   getCommunityById,
   updateCommunityById,
 } from "../../services/communityService";
+import toast from "react-hot-toast";
 
 function EditCommunity({ user }) {
   const [community, setCommunity] = useState(null);
@@ -59,6 +60,8 @@ function EditCommunity({ user }) {
       setError("");
 
       await updateCommunityById(communityId, formData);
+      
+      toast.success("Community changes saved successfully!");
       navigate(`/communities/${communityId}`);
     } catch (err) {
       setError(

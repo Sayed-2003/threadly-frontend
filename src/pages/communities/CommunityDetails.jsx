@@ -8,6 +8,7 @@ import {
 } from "../../services/communityService";
 import { getPostsByCommunity } from "../../services/postService";
 import PostCard from "../../components/posts/PostCard";
+import toast from "react-hot-toast";
 
 function CommunityDetails({ user }) {
   const [community, setCommunity] = useState(null);
@@ -76,53 +77,98 @@ function CommunityDetails({ user }) {
 
       const response = await joinCommunity(communityId);
       setCommunity(response);
+      toast.success("You joined the community!");
     } catch (err) {
       setError(
         err?.response?.data?.message ||
-          err?.response?.data?.err ||
-          "Could not join community"
+        err?.response?.data?.err ||
+        "Could not join community"
       );
     } finally {
       setSubmitting(false);
     }
   }
 
-  async function handleLeave() {
+  function handleLeave() {
+    toast(
+      (t) => (
+        <div>
+          <p>Are you sure you want to leave this community?</p>
+          <button
+            type="button"
+            onClick={() => {
+              toast.dismiss(t.id);
+              confirmLeave();
+            }}
+          >
+            Leave
+          </button>
+          <button type="button" onClick={() => toast.dismiss(t.id)}>
+            Cancel
+          </button>
+        </div>
+      ),
+      { id: "confirm-leave-community", duration: Infinity }
+    );
+  }
+
+  async function confirmLeave() {
     try {
       setSubmitting(true);
       setError("");
 
       const response = await leaveCommunity(communityId);
       setCommunity(response);
+      toast.success("You left the community");
     } catch (err) {
       setError(
         err?.response?.data?.message ||
-          err?.response?.data?.err ||
-          "Could not leave community"
+        err?.response?.data?.err ||
+        "Could not leave community"
       );
     } finally {
       setSubmitting(false);
     }
   }
 
-  async function handleDelete() {
-    const confirmed = window.confirm(
-      "Delete this community and all its posts, comments, votes, and bookmarks?"
+  function handleDelete() {
+    toast(
+      (t) => (
+        <div>
+          <p>
+            Delete this community and all its posts, comments, votes, and bookmarks?
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              toast.dismiss(t.id);
+              confirmDelete();
+            }}
+          >
+            Delete
+          </button>
+          <button type="button" onClick={() => toast.dismiss(t.id)}>
+            Cancel
+          </button>
+        </div>
+      ),
+      { id: "confirm-delete-community", duration: Infinity }
     );
+  }
 
-    if (!confirmed) return;
-
+  async function confirmDelete() {
     try {
       setSubmitting(true);
       setError("");
 
       await deleteCommunityById(communityId);
+      toast.success("Community deleted successfully!");
       navigate("/communities");
     } catch (err) {
       setError(
         err?.response?.data?.message ||
-          err?.response?.data?.err ||
-          "Could not delete community"
+        err?.response?.data?.err ||
+        "Could not delete community"
       );
     } finally {
       setSubmitting(false);

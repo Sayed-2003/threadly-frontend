@@ -5,6 +5,8 @@ import { getPostById,deletePostById,} from "../../services/postService";
 import CommentsSection from "../../components/comments/CommentsSection";
 import VoteButtons from "../../components/votes/VoteButtons";
 import BookmarkButton from "../../components/bookmarks/BookmarkButton";
+import toast from "react-hot-toast";
+
 
 function PostDetails({ user }) {
   const [post, setPost] = useState(null);
@@ -40,29 +42,57 @@ function PostDetails({ user }) {
   const isAuthor =
     user && post && post.author?._id === user._id;
 
-  async function handleDelete() {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this post?"
-    );
+  function handleDelete() {
+  toast(
+    (t) => (
+      <div>
+        <p>Are you sure you want to delete this post?</p>
 
-    if (!confirmed) return;
+        <button
+          type="button"
+          onClick={() => {
+            toast.dismiss(t.id);
+            confirmDelete();
+          }}
+        >
+          Delete
+        </button>
 
-    try {
-      setDeleting(true);
-      setError("");
-
-      await deletePostById(postId);
-      navigate(`/communities/${post.community._id}`);
-    } catch (err) {
-      setError(
-        err?.response?.data?.message ||
-          err?.response?.data?.err ||
-          "Could not delete post"
-      );
-    } finally {
-      setDeleting(false);
+        <button
+          type="button"
+          onClick={() => toast.dismiss(t.id)}
+        >
+          Cancel
+        </button>
+      </div>
+    ),
+    {
+      id: "confirm-delete-post",
+      duration: Infinity,
     }
+  );
+}
+
+async function confirmDelete() {
+  try {
+    setDeleting(true);
+    setError("");
+
+    await deletePostById(postId);
+
+    toast.success("Post deleted successfully!");
+    navigate(`/communities/${post.community._id}`);
+  } catch (err) {
+    setError(
+      err?.response?.data?.message ||
+        err?.response?.data?.err ||
+        "Could not delete post"
+    );
+  } finally {
+    setDeleting(false);
   }
+}
+
 
   return (
     <div>
@@ -112,6 +142,7 @@ function PostDetails({ user }) {
       ) : null}
     </div>
   );
-}
+} 
+
 
 export default PostDetails;
