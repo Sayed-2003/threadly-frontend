@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
+import toast from "react-hot-toast";
 import {
   getPostById,
   updatePostById,
@@ -62,6 +63,7 @@ function EditPost({ user }) {
       setError("");
 
       await updatePostById(postId, formData);
+      toast.success("Post changes saved successfully!");
       navigate(`/posts/${postId}`);
     } catch (err) {
       setError(

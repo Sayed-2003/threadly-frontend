@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import toast from "react-hot-toast";
 import {
   getBookmarks,
   addBookmark,
@@ -56,9 +57,11 @@ function BookmarkButton({ postId, user, onBookmarkRemoved }) {
       if (action === "removing") {
         await removeBookmark(postId);
         markAsRemoved();
+        toast.success("Post removed from bookmarks!");
       } else {
         await addBookmark(postId);
         setIsSaved(true);
+        toast.success("Post saved to bookmarks!");
       }
     } catch (err) {
       const errorStatus = err?.response?.status;

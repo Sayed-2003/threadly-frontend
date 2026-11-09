@@ -15,6 +15,7 @@ import PostDetails from "./pages/posts/PostDetails";
 import CreatePost from "./pages/posts/CreatePost";
 import EditPost from "./pages/posts/EditPost";
 import BookmarksPage from "./pages/bookmarks/BookmarksPage";
+import toast, { Toaster } from "react-hot-toast";
 
 
 
@@ -35,10 +36,12 @@ function App() {
     logout();
     setUser(null);
     setShowCreateCommunity(false);
+    toast.success("Signed out successfully!");
   }
 
   return (
     <div>
+     <Toaster position="top-center" />
       <Navbar
         user={user}
         handleLogout={handleLogout}
