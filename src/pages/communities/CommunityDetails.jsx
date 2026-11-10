@@ -32,9 +32,7 @@ function CommunityDetails({ user }) {
       const response = await getCommunityById(communityId);
       setCommunity(response);
     } catch (err) {
-      setError(
-        err?.response?.data?.message || "Could not load community"
-      );
+      setError(err?.response?.data?.message || "Could not load community");
     } finally {
       setLoading(false);
     }
@@ -50,7 +48,7 @@ function CommunityDetails({ user }) {
       setPosts(response);
     } catch (err) {
       setPostsError(
-        err?.response?.data?.message || "Could not load community posts"
+        err?.response?.data?.message || "Could not load community posts",
       );
     } finally {
       setPostsLoading(false);
@@ -67,8 +65,7 @@ function CommunityDetails({ user }) {
       ? community.members.find((member) => member === user._id)
       : false;
 
-  const isOwner =
-    user && community && community.owner === user._id;
+  const isOwner = user && community && community.owner === user._id;
 
   async function handleJoin() {
     try {
@@ -81,8 +78,8 @@ function CommunityDetails({ user }) {
     } catch (err) {
       setError(
         err?.response?.data?.message ||
-        err?.response?.data?.err ||
-        "Could not join community"
+          err?.response?.data?.err ||
+          "Could not join community",
       );
     } finally {
       setSubmitting(false);
@@ -108,7 +105,7 @@ function CommunityDetails({ user }) {
           </button>
         </div>
       ),
-      { id: "confirm-leave-community", duration: Infinity }
+      { id: "confirm-leave-community", duration: Infinity },
     );
   }
 
@@ -123,8 +120,8 @@ function CommunityDetails({ user }) {
     } catch (err) {
       setError(
         err?.response?.data?.message ||
-        err?.response?.data?.err ||
-        "Could not leave community"
+          err?.response?.data?.err ||
+          "Could not leave community",
       );
     } finally {
       setSubmitting(false);
@@ -136,7 +133,8 @@ function CommunityDetails({ user }) {
       (t) => (
         <div>
           <p>
-            Delete this community and all its posts, comments, votes, and bookmarks?
+            Delete this community and all its posts, comments, votes, and
+            bookmarks?
           </p>
           <button
             type="button"
@@ -152,7 +150,7 @@ function CommunityDetails({ user }) {
           </button>
         </div>
       ),
-      { id: "confirm-delete-community", duration: Infinity }
+      { id: "confirm-delete-community", duration: Infinity },
     );
   }
 
@@ -167,8 +165,8 @@ function CommunityDetails({ user }) {
     } catch (err) {
       setError(
         err?.response?.data?.message ||
-        err?.response?.data?.err ||
-        "Could not delete community"
+          err?.response?.data?.err ||
+          "Could not delete community",
       );
     } finally {
       setSubmitting(false);
@@ -184,6 +182,23 @@ function CommunityDetails({ user }) {
       ) : community ? (
         <>
           <h1>r/{community.name}</h1>
+          {community.imageUrl && (
+            <img
+              src={
+                new URL(
+                  community.imageUrl,
+                  import.meta.env.VITE_BACK_END_SERVER_URL,
+                ).href
+              }
+              alt={`${community.name} community`}
+              style={{
+                width: "200px",
+                height: "200px",
+                objectFit: "cover",
+                borderRadius: "12px",
+              }}
+            />
+          )}
           <p>{community.description}</p>
           <p>Members: {community.members.length}</p>
 
@@ -211,26 +226,16 @@ function CommunityDetails({ user }) {
 
           {user ? (
             isMember ? (
-              <button
-                type="button"
-                onClick={handleLeave}
-                disabled={submitting}
-              >
+              <button type="button" onClick={handleLeave} disabled={submitting}>
                 {submitting ? "Please wait..." : "Leave Community"}
               </button>
             ) : (
-              <button
-                type="button"
-                onClick={handleJoin}
-                disabled={submitting}
-              >
+              <button type="button" onClick={handleJoin} disabled={submitting}>
                 {submitting ? "Please wait..." : "Join Community"}
               </button>
             )
           ) : (
-            <Link to="/sign-in">
-              Sign in to join this community
-            </Link>
+            <Link to="/sign-in">Sign in to join this community</Link>
           )}
 
           <h2>Posts</h2>
