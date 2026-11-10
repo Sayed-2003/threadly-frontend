@@ -66,7 +66,7 @@ function VoteButtons({ postId, user }) {
   }
 
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+    <div className="vote-buttons" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
       <button
         type="button"
         aria-label="Upvote"

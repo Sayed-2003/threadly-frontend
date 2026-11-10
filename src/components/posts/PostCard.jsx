@@ -4,20 +4,20 @@ import BookmarkButton from "../bookmarks/BookmarkButton";
 
 function PostCard({ post, user, showCommunity = true, onBookmarkRemoved }) {
   return (
-    <div>
+    <div className="threadly-card post-card">
       {showCommunity && post.community && (
         <Link to={`/communities/${post.community._id}`}>
           r/{post.community.name}
         </Link>
       )}
 
-      <p>u/{post.author?.username || "Unknown user"}</p>
+      <p className="post-author">u/{post.author?.username || "Unknown user"}</p>
 
       <Link to={`/posts/${post._id}`}>
         <h2>{post.title}</h2>
       </Link>
 
-      <p>{post.text}</p>
+      <p className="post-copy">{post.text}</p>
 
       {post.imageUrl && (
         <img

@@ -40,10 +40,10 @@ function Signup() {
   };
 
   return (
-    <main>
+    <main className="threadly-page auth-page">
       <h1>Sign Up</h1>
       <p className="error">{error}</p>
-      <form onSubmit={handleSubmit}>
+      <form className="threadly-form" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username:</label>
           <input

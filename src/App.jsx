@@ -16,6 +16,7 @@ import CreatePost from "./pages/posts/CreatePost";
 import EditPost from "./pages/posts/EditPost";
 import BookmarksPage from "./pages/bookmarks/BookmarksPage";
 import toast, { Toaster } from "react-hot-toast";
+import ThreadlyLayout from "./components/design/ThreadlyLayout";
 
 
 
@@ -40,7 +41,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="threadly-app">
      <Toaster position="top-center" />
       <Navbar
         user={user}
@@ -52,15 +53,16 @@ function App() {
           onClose={() => setShowCreateCommunity(false)}
         />
       )}
+      <ThreadlyLayout user={user} onCreateCommunity={() => setShowCreateCommunity(true)}>
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<Homepage user={user} onCreateCommunity={() => setShowCreateCommunity(true)} />} />
         <Route path="/sign-up" element={<SignupPage />} />
         <Route path="/sign-in" element={<SignInPage setUser={setUser} />} />
         <Route
           path="/dashboard"
           element={user ? <Dashboard user={user} /> : <Navigate to="/sign-in" />}
         />
-        <Route path="/communities" element={<AllCommunities />} />
+        <Route path="/communities" element={<AllCommunities user={user} onCreateCommunity={() => setShowCreateCommunity(true)} />} />
         <Route
           path="/communities/:communityId"
           element={<CommunityDetails user={user} />}
@@ -93,6 +95,7 @@ function App() {
           }
         />
       </Routes>
+      </ThreadlyLayout>
     </div>
   );
 }

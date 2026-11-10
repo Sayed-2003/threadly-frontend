@@ -33,10 +33,10 @@ const SignInForm = ({ setUser }) => {
   };
 
   return (
-    <main>
+    <main className="threadly-page auth-page">
       <h1>Sign In</h1>
       <p className='error'>{error}</p>
-      <form autoComplete='off' onSubmit={handleSubmit}>
+      <form className="threadly-form" autoComplete='off' onSubmit={handleSubmit}>
         <div>
           <label htmlFor='email'>Username:</label>
           <input

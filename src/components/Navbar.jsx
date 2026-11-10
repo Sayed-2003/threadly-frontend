@@ -1,33 +1,52 @@
 import { Link } from "react-router";
+import DesignIcon from "./design/DesignIcon";
 
 function Navbar({ user, handleLogout, onCreateCommunity }) {
   return (
-    <nav>
-      <Link to="/">threadly</Link>
-      <Link to="/communities">Communities</Link>
+    <header className="threadly-header">
+      <a className="skip-link" href="#main-content">Skip to content</a>
+      <nav className="header-inner" aria-label="Account navigation">
+      <Link className="threadly-brand" to="/" aria-label="Threadly homepage">
+        <span className="brand-mark"><DesignIcon name="leaf" size={29} /></span>
+        <span>threadly<span className="brand-dot">.</span></span>
+      </Link>
+      <Link className="header-search" to="/communities" aria-label="Browse and search communities">
+        <DesignIcon name="search" size={20} />
+        <span>A community for every curiosity...</span>
+        <span className="search-return" aria-hidden="true">↵</span>
+      </Link>
+      <div className="header-account">
+      <span className="header-motto">Find your people.</span>
+      <Link className="header-community-link" to="/communities">Communities</Link>
 
       {user ? (
         <>
-          <Link to="/dashboard">Dashboard</Link>
-          <Link to="/bookmarks">Bookmarks</Link>
-
-          <button type="button" onClick={onCreateCommunity}>
-            Create Community
+          <button className="header-create" type="button" onClick={onCreateCommunity}>
+            <DesignIcon name="plus" size={20} />
+            <span>Create <span className="create-label-long">Community</span></span>
           </button>
-
-          <span>{user.username}</span>
-
-          <button type="button" onClick={handleLogout}>
-            Sign Out
-          </button>
+          <details className="account-menu">
+            <summary aria-label={`${user.username} account menu`}>
+              <span className="user-avatar">{user.username.charAt(0).toUpperCase()}</span>
+              <DesignIcon name="chevron" size={15} />
+            </summary>
+            <div className="account-dropdown">
+              <span className="account-name">{user.username}</span>
+              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/bookmarks">Bookmarks</Link>
+              <button type="button" onClick={handleLogout}>Sign Out</button>
+            </div>
+          </details>
         </>
       ) : (
         <>
-          <Link to="/sign-up">Sign Up</Link>
-          <Link to="/sign-in">Sign In</Link>
+          <Link className="header-signin" to="/sign-in">Sign In</Link>
+          <Link className="header-create" to="/sign-up">Sign Up <DesignIcon name="arrow" size={17} /></Link>
         </>
       )}
-    </nav>
+      </div>
+      </nav>
+    </header>
   );
 }
 

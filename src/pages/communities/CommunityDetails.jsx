@@ -174,7 +174,7 @@ function CommunityDetails({ user }) {
   }
 
   return (
-    <div>
+    <div className="threadly-page community-details">
       {error && <p role="alert">{error}</p>}
 
       {loading ? (
@@ -209,7 +209,7 @@ function CommunityDetails({ user }) {
           )}
 
           {isOwner && (
-            <div>
+            <div className="threadly-actions">
               <Link to={`/communities/${communityId}/edit`}>
                 Edit Community
               </Link>

@@ -1,0 +1,460 @@
+﻿/* Shared page styles. JavaScript behaviour stays in the existing components. */
+.threadly-page {
+  min-width: 0;
+  color: var(--color-text, #293d33);
+}
+
+.threadly-page > h1 {
+  margin: 0 0 28px;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -1.5px;
+  overflow-wrap: anywhere;
+}
+
+.threadly-page > h2 {
+  margin: 34px 0 20px;
+  font-size: 24px;
+  letter-spacing: -0.7px;
+}
+
+.threadly-page > p {
+  color: var(--color-muted, #737f6b);
+  line-height: 1.8;
+}
+
+.threadly-page a {
+  text-decoration: none;
+}
+
+.threadly-page a:hover {
+  color: #55744b;
+}
+
+
+.threadly-page button,
+.comments-section button {
+  min-height: 42px;
+  padding: 10px 18px;
+  border: 1px solid var(--color-border, #e0e5d7);
+  border-radius: 11px;
+  background: var(--color-paper, #fffefa);
+  color: var(--color-green, #294f3e);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+.threadly-page button:hover:not(:disabled),
+.comments-section button:hover:not(:disabled) {
+  border-color: #b9c9aa;
+  background-color: #edf1e5;
+}
+
+.threadly-page button:disabled,
+.comments-section button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.threadly-page [role="alert"],
+.comments-section [role="alert"],
+.threadly-page .error:not(:empty) {
+  padding: 12px 16px;
+  border: 1px solid #edc7b7;
+  border-radius: 10px;
+  background: #fff2e9;
+  color: #9b503c;
+  font-size: 14px;
+}
+
+.threadly-page .error:empty {
+  display: none;
+}
+
+
+.auth-page,
+.edit-page,
+.dashboard-page,
+.community-details,
+.post-details {
+  padding: 32px;
+  border: 1px solid var(--color-border, #e0e5d7);
+  border-radius: 22px;
+  background: var(--color-paper, #fffefa);
+}
+
+.auth-page {
+  max-width: 550px;
+  margin: 22px auto;
+  padding: 38px;
+}
+
+.auth-page > h1 {
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--color-border, #e0e5d7);
+}
+
+.edit-page {
+  max-width: 820px;
+}
+
+.edit-page > h2 {
+  margin-top: 0;
+  color: #69815a;
+  font-size: 18px;
+}
+
+
+.threadly-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.threadly-form > div {
+  width: 100%;
+}
+
+.threadly-form > div:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.threadly-form label {
+  display: block;
+  width: 100%;
+  margin: 6px 0 0;
+  color: #56654e;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.threadly-form > div > label {
+  margin-bottom: 9px;
+}
+
+.threadly-form input,
+.threadly-form textarea,
+.threadly-form select,
+.comments-section textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 13px 15px;
+  border: 1px solid #dce3d3;
+  border-radius: 11px;
+  background: #fcfcf8;
+  color: var(--color-text, #293d33);
+  font: inherit;
+  font-size: 15px;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.threadly-form textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.threadly-form input:focus,
+.threadly-form textarea:focus,
+.comments-section textarea:focus {
+  border-color: #89a479;
+  box-shadow: 0 0 0 3px #e8eedd;
+}
+
+.threadly-form input[type="file"] {
+  padding: 8px;
+  font-size: 13px;
+}
+
+.threadly-form input::file-selector-button {
+  margin-right: 12px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 7px;
+  background: #e8eedd;
+  color: #496647;
+  font: inherit;
+  cursor: pointer;
+}
+
+.threadly-form > p {
+  width: 100%;
+  margin: 0 0 8px;
+  color: var(--color-muted, #737f6b);
+  font-size: 12px;
+}
+
+.threadly-form > img {
+  max-width: 100%;
+}
+
+.threadly-form button[type="submit"],
+.auth-page form > div:last-child > button:first-child {
+  border-color: var(--color-green, #294f3e);
+  background: var(--color-green, #294f3e);
+  color: #fffefa;
+}
+
+.threadly-form button[type="submit"]:hover:not(:disabled),
+.auth-page form > div:last-child > button:first-child:hover:not(:disabled) {
+  border-color: #426b49;
+  background: #426b49;
+}
+
+.dashboard-page {
+  min-height: 240px;
+  background: #eaf0df;
+}
+
+.dashboard-page > h1 {
+  margin: 0;
+}
+
+
+.threadly-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.threadly-actions > a,
+.community-details > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  margin: 0 8px 12px 0;
+  padding: 10px 16px;
+  border: 1px solid #dce3d3;
+  border-radius: 11px;
+  background: #edf1e5;
+  color: #375d40;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.threadly-actions > a {
+  margin: 0;
+}
+
+.community-details > img {
+  margin-bottom: 20px;
+  border: 1px solid #dce3d3;
+}
+
+.community-details > button {
+  margin: 0 8px 12px 0;
+}
+
+.community-details > h2 {
+  padding-top: 26px;
+  border-top: 1px solid var(--color-border, #e0e5d7);
+}
+
+
+.threadly-card {
+  min-width: 0;
+  padding: 26px;
+  border: 1px solid var(--color-border, #e0e5d7);
+  border-radius: 18px;
+  background: var(--color-paper, #fffefa);
+}
+
+.post-card {
+  margin: 0 0 18px;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.post-card:hover {
+  border-color: #c6d3ba;
+  box-shadow: 0 6px 22px rgb(41 61 51 / 4%);
+}
+
+.post-card > a:first-child {
+  color: #55764b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.post-card .post-author,
+.post-details > p:first-of-type {
+  margin: 8px 0 16px;
+  color: #7b8672;
+  font-size: 12px;
+}
+
+.post-card h2 {
+  margin: 0 0 12px;
+  color: var(--color-text, #293d33);
+  font-size: 23px;
+  line-height: 1.35;
+  letter-spacing: -0.6px;
+  overflow-wrap: anywhere;
+}
+
+.post-card .post-copy,
+.post-details > p {
+  color: #68745f;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.post-card > img,
+.post-details > img {
+  margin-bottom: 20px;
+}
+
+
+.vote-buttons,
+.bookmark-button {
+  display: inline-flex !important;
+  flex-wrap: wrap;
+  vertical-align: middle;
+  margin: 12px 12px 0 0;
+  font-size: 12px;
+}
+
+.vote-buttons button,
+.bookmark-button button {
+  min-height: 34px;
+  padding: 7px 12px;
+  border-color: transparent;
+  border-radius: 9px;
+  background-color: #edf1e6;
+  color: #526a48;
+  font-size: 12px;
+}
+
+.vote-buttons > span {
+  min-width: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.vote-buttons > p,
+.bookmark-button > p {
+  flex-basis: 100%;
+  margin-bottom: 0;
+}
+
+
+.comments-section {
+  padding-top: 26px;
+  border-top: 1px solid var(--color-border, #e0e5d7);
+}
+
+.comments-section > h2 {
+  margin: 0 0 20px;
+  font-size: 24px;
+  letter-spacing: -0.6px;
+}
+
+.comments-section > p,
+.comments-section > form + p {
+  color: #737f6b;
+  font-size: 14px;
+}
+
+.comments-section a {
+  color: #496d45;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.comments-section form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+/* Override original dark inline colours without changing the component logic. */
+.comments-section textarea {
+  min-height: 100px;
+  border-color: #dce3d3 !important;
+  background: #fcfcf8 !important;
+  color: #293d33 !important;
+  resize: vertical;
+}
+
+.comments-section form > button[type="submit"] {
+  background: #496847;
+  color: #fffefa;
+}
+
+.comment-thread {
+  min-width: 0;
+  border-left-color: #dce3d3 !important;
+}
+
+.comment-card {
+  padding: 18px !important;
+  border: 1px solid #e0e5d7;
+  border-radius: 12px !important;
+  background: #f4f6ed !important;
+  color: #53654a !important;
+  overflow-wrap: anywhere;
+}
+
+.comment-card > p:first-child {
+  margin-bottom: 8px;
+  color: #365c3e;
+  font-size: 13px;
+}
+
+.comment-card > p {
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.comment-card button {
+  min-height: 30px;
+  padding: 5px 10px;
+  background: transparent;
+  font-size: 12px;
+}
+
+
+@media (max-width: 700px) {
+  .auth-page,
+  .edit-page,
+  .dashboard-page,
+  .community-details,
+  .post-details {
+    padding: 24px 20px;
+    border-radius: 17px;
+  }
+
+  .auth-page {
+    margin: 0 auto;
+  }
+
+  .threadly-page > h1 {
+    margin-bottom: 22px;
+    font-size: 30px;
+    letter-spacing: -1px;
+  }
+
+  .threadly-card {
+    padding: 20px;
+  }
+
+  .post-card h2 {
+    font-size: 21px;
+  }
+
+  .comment-card {
+    padding: 12px !important;
+  }
+
+  .vote-buttons,
+  .bookmark-button {
+    max-width: 100%;
+  }
+
+}

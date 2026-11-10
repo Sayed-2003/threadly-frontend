@@ -216,6 +216,7 @@ function CommentsSection({ postId, user, communityId }) {
 
     return (
       <div
+        className="comment-thread"
         key={comment._id}
         style={{
           marginLeft: depth > 0 ? "16px" : "0",
@@ -226,6 +227,7 @@ function CommentsSection({ postId, user, communityId }) {
         }}
       >
         <div
+          className="comment-card"
           style={{
             padding: "12px",
             background: "#1a1d20",
@@ -360,7 +362,7 @@ function CommentsSection({ postId, user, communityId }) {
   }
 
   return (
-    <section style={{ marginTop: "32px" }}>
+    <section className="comments-section" style={{ marginTop: "32px" }}>
       <h2>Comments</h2>
 
       {error && <p role="alert">{error}</p>}

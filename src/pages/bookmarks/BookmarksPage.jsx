@@ -41,7 +41,7 @@ function BookmarksPage({ user }) {
   }
 
   return (
-    <div>
+    <div className="threadly-page bookmarks-page">
       <h1>Saved Posts</h1>
 
       {error && <p role="alert">{error}</p>}

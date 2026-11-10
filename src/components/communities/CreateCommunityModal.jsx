@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { createNewCommunity } from "../../services/communityService";
-import "./CreateCommunityModal.css";
+import "../../design/community-modal.css";
 import toast from "react-hot-toast";
 
 function CreateCommunityModal({ onClose }) {
