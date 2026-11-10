@@ -15,6 +15,8 @@ function EditPost({ user }) {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState("");
 
   const { postId } = useParams();
   const navigate = useNavigate();
@@ -62,7 +64,15 @@ function EditPost({ user }) {
       setSubmitting(true);
       setError("");
 
-      await updatePostById(postId, formData);
+      const postData = new FormData();
+      postData.append("title", formData.title);
+      postData.append("text", formData.text);
+
+      if (image) {
+        postData.append("image", image);
+      }
+
+      await updatePostById(postId, postData);
       toast.success("Post changes saved successfully!");
       navigate(`/posts/${postId}`);
     } catch (err) {
@@ -75,6 +85,18 @@ function EditPost({ user }) {
       setSubmitting(false);
     }
   }
+
+  useEffect(() => {
+    if (!image) {
+      setImagePreview("");
+      return;
+    }
+
+    const previewUrl = URL.createObjectURL(image);
+    setImagePreview(previewUrl);
+
+    return () => URL.revokeObjectURL(previewUrl);
+  }, [image]);
 
   return (
     <div>
@@ -107,6 +129,45 @@ function EditPost({ user }) {
               maxLength={5000}
               required
             />
+
+            {(imagePreview || post.imageUrl) && (
+              <img
+                src={imagePreview || new URL(
+                  post.imageUrl,
+                  import.meta.env.VITE_BACK_END_SERVER_URL
+                ).href}
+                alt={`${post.title} photo`}
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "400px",
+                  objectFit: "contain",
+                  borderRadius: "12px",
+                }}
+              />
+            )}
+
+            <label htmlFor="post-image">Change post photo:</label>
+            <input
+              type="file"
+              id="post-image"
+              name="image"
+              accept="image/jpeg,image/png,image/webp"
+              disabled={submitting}
+              onChange={(event) => {
+                const selectedImage = event.target.files?.[0] || null;
+
+                if (selectedImage && selectedImage.size > 5 * 1024 * 1024) {
+                  setError("Image must be 5 MB or smaller");
+                  setImage(null);
+                  event.target.value = "";
+                  return;
+                }
+
+                setError("");
+                setImage(selectedImage);
+              }}
+            />
+            <p>Leave this empty to keep the current photo.</p>
 
             <button type="submit" disabled={submitting}>
               {submitting ? "Saving..." : "Save Changes"}
