@@ -111,6 +111,24 @@ async function confirmDelete() {
           <h1>{post.title}</h1>
           <p>{post.text}</p>
 
+      {post.imageUrl && (
+        <img
+          src={new URL(
+            post.imageUrl,
+            import.meta.env.VITE_BACK_END_SERVER_URL
+          ).href}
+          alt={`${post.title} photo`}
+          style={{
+            display: "block",
+            maxWidth: "100%",
+            maxHeight: "500px",
+            objectFit: "contain",
+            borderRadius: "12px",
+            marginTop: "12px",
+          }}
+        />
+      )}
+
           {isAuthor && (
             <div>
               {!deleting && (

@@ -15,6 +15,8 @@ function CreatePost({ user }) {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState("");
 
   const { communityId } = useParams();
   const navigate = useNavigate();
@@ -64,11 +66,16 @@ function CreatePost({ user }) {
       setSubmitting(true);
       setError("");
 
-      const newPost = await createNewPost({
-        title: formData.title,
-        text: formData.text,
-        community: communityId,
-      });
+      const postData = new FormData();
+      postData.append("title", formData.title);
+      postData.append("text", formData.text);
+      postData.append("community", communityId);
+
+      if (image) {
+        postData.append("image", image);
+      }
+
+      const newPost = await createNewPost(postData);
       toast.success("Post created successfully!");
 
       navigate(`/posts/${newPost._id}`);
@@ -82,6 +89,18 @@ function CreatePost({ user }) {
       setSubmitting(false);
     }
   }
+
+  useEffect(() => {
+    if (!image) {
+      setImagePreview("");
+      return;
+    }
+
+    const previewUrl = URL.createObjectURL(image);
+    setImagePreview(previewUrl);
+
+    return () => URL.revokeObjectURL(previewUrl);
+  }, [image]);
 
   return (
     <div>
@@ -116,6 +135,42 @@ function CreatePost({ user }) {
                 onChange={handleChange}
                 maxLength={5000}
                 required
+              />
+
+              {imagePreview && (
+                <img
+                  src={imagePreview}
+                  alt="Selected post photo"
+                  style={{
+                    display: "block",
+                    maxWidth: "100%",
+                    maxHeight: "400px",
+                    objectFit: "contain",
+                    borderRadius: "12px",
+                  }}
+                />
+              )}
+
+              <label htmlFor="post-image">Post photo:</label>
+              <input
+                type="file"
+                id="post-image"
+                name="image"
+                accept="image/jpeg,image/png,image/webp"
+                disabled={submitting}
+                onChange={(event) => {
+                  const selectedImage = event.target.files?.[0] || null;
+
+                  if (selectedImage && selectedImage.size > 5 * 1024 * 1024) {
+                    setError("Image must be 5 MB or smaller");
+                    setImage(null);
+                    event.target.value = "";
+                    return;
+                  }
+
+                  setError("");
+                  setImage(selectedImage);
+                }}
               />
 
               <button type="submit" disabled={submitting}>
