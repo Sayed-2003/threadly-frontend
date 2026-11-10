@@ -15,6 +15,8 @@ function EditCommunity({ user }) {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState("");
 
   const { communityId } = useParams();
   const navigate = useNavigate();
@@ -33,9 +35,7 @@ function EditCommunity({ user }) {
         description: response.description,
       });
     } catch (err) {
-      setError(
-        err?.response?.data?.message || "Could not load community"
-      );
+      setError(err?.response?.data?.message || "Could not load community");
     } finally {
       setLoading(false);
     }
@@ -59,23 +59,43 @@ function EditCommunity({ user }) {
       setSubmitting(true);
       setError("");
 
-      await updateCommunityById(communityId, formData);
-      
+      const communityData = new FormData();
+
+      communityData.append("name", formData.name);
+      communityData.append("description", formData.description);
+
+      if (image) {
+        communityData.append("image", image);
+      }
+
+      await updateCommunityById(communityId, communityData);
+
       toast.success("Community changes saved successfully!");
       navigate(`/communities/${communityId}`);
     } catch (err) {
       setError(
         err?.response?.data?.message ||
           err?.response?.data?.err ||
-          "Could not update community"
+          "Could not update community",
       );
     } finally {
       setSubmitting(false);
     }
   }
 
-  const isOwner =
-    user && community && community.owner === user._id;
+  const isOwner = user && community && community.owner === user._id;
+
+  useEffect(() => {
+    if (!image) {
+      setImagePreview("");
+      return;
+    }
+
+    const previewUrl = URL.createObjectURL(image);
+    setImagePreview(previewUrl);
+
+    return () => URL.revokeObjectURL(previewUrl);
+  }, [image]);
 
   return (
     <div>
@@ -107,6 +127,49 @@ function EditCommunity({ user }) {
               maxLength={500}
               required
             />
+
+            {(imagePreview || community.imageUrl) && (
+              <img
+                src={
+                  imagePreview ||
+                  new URL(
+                    community.imageUrl,
+                    import.meta.env.VITE_BACK_END_SERVER_URL,
+                  ).href
+                }
+                alt={`${community.name} community`}
+                style={{
+                  width: "150px",
+                  height: "150px",
+                  objectFit: "cover",
+                  borderRadius: "12px",
+                }}
+              />
+            )}
+
+            <label htmlFor="community-image">Change community photo:</label>
+            <input
+              type="file"
+              id="community-image"
+              name="image"
+              accept="image/jpeg,image/png,image/webp"
+              disabled={submitting}
+              onChange={(event) => {
+                const selectedImage = event.target.files?.[0] || null;
+
+                if (selectedImage && selectedImage.size > 5 * 1024 * 1024) {
+                  setError("Image must be 5 MB or smaller");
+                  setImage(null);
+                  event.target.value = "";
+                  return;
+                }
+
+                setError("");
+                setImage(selectedImage);
+              }}
+            />
+
+            <p>Leave this empty to keep the current photo.</p>
 
             <button type="submit" disabled={submitting}>
               {submitting ? "Saving..." : "Save Changes"}

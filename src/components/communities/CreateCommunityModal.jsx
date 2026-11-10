@@ -11,6 +11,7 @@ function CreateCommunityModal({ onClose }) {
   });
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [image, setImage] = useState(null);
 
   const navigate = useNavigate();
 
@@ -28,7 +29,16 @@ function CreateCommunityModal({ onClose }) {
       setSubmitting(true);
       setError("");
 
-      const newCommunity = await createNewCommunity(formData);
+      const communityData = new FormData();
+
+      communityData.append("name", formData.name);
+      communityData.append("description", formData.description);
+
+      if (image) {
+        communityData.append("image", image);
+      }
+
+      const newCommunity = await createNewCommunity(communityData);
 
       toast.success("Community created successfully!");
 
@@ -37,8 +47,8 @@ function CreateCommunityModal({ onClose }) {
     } catch (err) {
       setError(
         err?.response?.data?.message ||
-        err?.response?.data?.err ||
-        "Could not create community"
+          err?.response?.data?.err ||
+          "Could not create community",
       );
       setSubmitting(false);
     }
@@ -77,15 +87,33 @@ function CreateCommunityModal({ onClose }) {
             required
           />
 
+          <label htmlFor="community-image">Community photo:</label>
+          <input
+            type="file"
+            id="community-image"
+            name="image"
+            accept="image/jpeg,image/png,image/webp"
+            disabled={submitting}
+            onChange={(event) => {
+              const selectedImage = event.target.files?.[0] || null;
+
+              if (selectedImage && selectedImage.size > 5 * 1024 * 1024) {
+                setError("Image must be 5 MB or smaller");
+                setImage(null);
+                event.target.value = "";
+                return;
+              }
+
+              setError("");
+              setImage(selectedImage);
+            }}
+          />
+
           <button type="submit" disabled={submitting}>
             {submitting ? "Creating..." : "Create Community"}
           </button>
 
-          <button
-            type="button"
-            onClick={onClose}
-            disabled={submitting}
-          >
+          <button type="button" onClick={onClose} disabled={submitting}>
             Cancel
           </button>
         </form>
