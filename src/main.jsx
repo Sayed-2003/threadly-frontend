@@ -4,7 +4,10 @@ import "./index.css";
 import "./design/base.css";
 import "./design/layout.css";
 import "./design/discover.css";
+import "./design/conversation-art.css";
 import "./design/pages.css";
+import "./design/communities.css";
+import "./design/community-header.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router";
 

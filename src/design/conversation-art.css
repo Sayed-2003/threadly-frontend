@@ -1,0 +1,389 @@
+.conversation-art {
+  position: absolute;
+  right: 28px;
+  bottom: 32px;
+  width: 42%;
+  aspect-ratio: 1.25;
+  isolation: isolate;
+  pointer-events: none;
+}
+
+.conversation-art-backdrop {
+  position: absolute;
+  inset: 14% 5% 9% 10%;
+  border: 1px solid var(--color-border);
+  border-radius: 28px;
+  background: var(--color-accent-soft);
+  transform: rotate(12deg);
+}
+
+.conversation-art-orbit {
+  position: absolute;
+  inset: 2% 1% 1% 0;
+  border: 1px dashed var(--color-border);
+  border-radius: 50%;
+  transform: rotate(-22deg);
+}
+
+.conversation-art-card {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  width: 88%;
+  padding: 21px 22px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-paper);
+  color: var(--color-text);
+  box-shadow: var(--shadow-soft);
+  transform: rotate(-6deg);
+}
+
+.conversation-art-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 21px;
+}
+
+.conversation-art-community {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--color-muted);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.conversation-art-community svg {
+  color: var(--color-accent);
+}
+
+.conversation-art-dots {
+  color: var(--color-muted);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 0.5;
+}
+
+.conversation-art-message {
+  margin-bottom: 16px;
+  font-size: clamp(19px, 1.7vw, 29px);
+  font-weight: 750;
+  letter-spacing: -0.06em;
+  line-height: 1.2;
+}
+
+.conversation-art-message > span {
+  color: var(--color-accent);
+}
+
+.conversation-art-line {
+  width: 80%;
+  height: 5px;
+  margin-bottom: 7px;
+  border-radius: 4px;
+  background: var(--color-border);
+}
+
+.conversation-art-line-short {
+  width: 56%;
+}
+
+.conversation-art-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 23px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+}
+
+.conversation-art-avatars {
+  display: flex;
+  padding-left: 4px;
+}
+
+.conversation-art-avatars > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  margin-left: -4px;
+  border: 2px solid var(--color-paper);
+  border-radius: 50%;
+  background: var(--color-badge);
+  color: var(--color-text);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.conversation-art-avatars > span:nth-child(2) {
+  background: var(--color-accent-soft);
+  color: var(--color-accent-text);
+}
+
+.conversation-art-avatars > span:last-child {
+  background: var(--color-text);
+  color: var(--color-paper);
+}
+
+.conversation-art-replies {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--color-muted);
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.conversation-art-bubble {
+  position: absolute;
+  top: 3%;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 48%;
+  min-height: 84px;
+  padding: 17px 19px;
+  border-radius: 17px 17px 17px 4px;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  box-shadow: var(--shadow-soft);
+  transform: rotate(7deg);
+}
+
+.conversation-art-bubble > span:not(.conversation-art-notification) {
+  font-size: clamp(12px, 1.05vw, 17px);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  line-height: 1.3;
+}
+
+.conversation-art-notification {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 15px;
+  height: 15px;
+  border: 3px solid var(--color-paper);
+  border-radius: 50%;
+  background: var(--color-text);
+}
+
+.conversation-art-pill {
+  position: absolute;
+  bottom: 0;
+  left: 8%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px 11px 11px;
+  border: 1px solid var(--color-border);
+  border-radius: 50px;
+  background: var(--color-paper);
+  color: var(--color-text);
+  box-shadow: var(--shadow-soft);
+  transform: rotate(3deg);
+}
+
+.conversation-art-pill > span:not(.conversation-art-pill-icon) {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.conversation-art-pill > svg {
+  margin-left: 8px;
+  color: var(--color-accent);
+}
+
+.conversation-art-pill-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.conversation-art-spark {
+  position: absolute;
+  top: 8%;
+  left: 11%;
+  color: var(--color-accent);
+  transform: rotate(9deg);
+}
+
+.conversation-art-small-spark {
+  position: absolute;
+  right: 0;
+  bottom: 18%;
+  color: var(--color-accent);
+  transform: rotate(15deg);
+}
+
+.conversation-art-dot {
+  position: absolute;
+  top: 53%;
+  left: -2%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+@media (min-width: 1081px) and (max-width: 1450px) {
+  .conversation-art {
+    right: 20px;
+    bottom: 28px;
+    width: 42%;
+    aspect-ratio: 1.15;
+  }
+
+  .conversation-art-card {
+    padding: 17px 16px 14px;
+  }
+
+  .conversation-art-bubble {
+    gap: 8px;
+    min-height: 70px;
+    padding: 13px;
+  }
+
+  .conversation-art-pill {
+    gap: 7px;
+    padding: 8px 11px 8px 8px;
+  }
+
+  .conversation-art-pill > span:not(.conversation-art-pill-icon) {
+    font-size: 9px;
+  }
+
+  .conversation-art-replies {
+    font-size: 7px;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1080px) {
+  .conversation-art {
+    right: 20px;
+    bottom: 25px;
+    width: 43%;
+    aspect-ratio: 1.15;
+  }
+}
+
+@media (max-width: 760px) {
+  .conversation-art {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    align-self: center;
+    width: min(95%, 380px);
+    margin-top: 25px;
+  }
+
+  .conversation-art-message {
+    font-size: 27px;
+  }
+
+  .conversation-art-bubble > span:not(.conversation-art-notification) {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 380px) {
+  .conversation-art-card {
+    padding: 15px;
+  }
+
+  .conversation-art-card-top {
+    margin-bottom: 15px;
+  }
+
+  .conversation-art-message {
+    font-size: 22px;
+  }
+
+  .conversation-art-card-bottom {
+    margin-top: 17px;
+  }
+
+  .conversation-art-replies {
+    font-size: 7px;
+  }
+
+  .conversation-art-bubble {
+    gap: 8px;
+    min-height: 70px;
+    padding: 12px;
+  }
+
+  .conversation-art-bubble > span:not(.conversation-art-notification) {
+    font-size: 12px;
+  }
+
+  .conversation-art-pill {
+    bottom: -5%;
+    gap: 7px;
+  }
+
+  .conversation-art-pill > span:not(.conversation-art-pill-icon) {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 1450px) {
+  .conversation-art-card-top {
+    margin-bottom: 14px;
+  }
+
+  .conversation-art-message {
+    margin-bottom: 12px;
+    font-size: clamp(18px, 1.7vw, 24px);
+  }
+
+  .conversation-art-card-bottom {
+    margin-top: 14px;
+    padding-top: 10px;
+  }
+
+  .conversation-art-replies {
+    display: none;
+  }
+
+  .conversation-art-bubble {
+    display: block;
+    min-height: 0;
+    padding: 14px 12px;
+    text-align: center;
+  }
+
+  .conversation-art-bubble > svg {
+    display: none;
+  }
+
+  .conversation-art-bubble > span:not(.conversation-art-notification) {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 760px) {
+  .conversation-art-message {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 380px) {
+  .conversation-art-message {
+    font-size: 18px;
+  }
+}

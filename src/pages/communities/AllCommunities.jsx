@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { getAllCommunities } from "../../services/communityService";
 import DesignIcon from "../../components/design/DesignIcon";
 import CommunityAvatar from "../../components/design/CommunityAvatar";
+import CommunityCover from "../../components/design/CommunityCover";
 
 function AllCommunities({ embedded = false, user, onCreateCommunity }) {
   const [communities, setCommunities] = useState([]);
@@ -35,7 +36,7 @@ function AllCommunities({ embedded = false, user, onCreateCommunity }) {
         <div>
           <p className="eyebrow">Your next favorite corner</p>
           {embedded ? <h2>There’s a place for that.</h2> : <h1>Communities</h1>}
-          {!embedded && <p>Big passions, little interests. Find a place to put down roots.</p>}
+          {!embedded && <p>Big passions, little interests. Find a conversation worth joining.</p>}
         </div>
         {user ? (
           <button className="directory-create" type="button" onClick={onCreateCommunity}>
@@ -60,7 +61,7 @@ function AllCommunities({ embedded = false, user, onCreateCommunity }) {
         onChange={(event) => setSearch(event.target.value)}
       />
       </div>
-      <span className="directory-search-note"><DesignIcon name="sprout" size={18} /> Room to grow</span>
+      <span className="directory-search-note"><DesignIcon name="message" size={18} /> Find your people</span>
       </div>
 
       {error && <p className="directory-message directory-error" role="alert">{error}</p>}
@@ -77,17 +78,30 @@ function AllCommunities({ embedded = false, user, onCreateCommunity }) {
 
           <div className="community-grid">
           {filteredCommunities.map((oneCommunity) => (
-            <div className="community-card" key={oneCommunity._id}>
-              <Link className="community-card-heading" to={`/communities/${oneCommunity._id}`}>
-                <CommunityAvatar community={oneCommunity} />
-                <h2>r/{oneCommunity.name}</h2>
-              </Link>
-              <p className="community-card-description">{oneCommunity.description}</p>
-              <div className="community-card-footer">
-              <p><DesignIcon name="users" size={16} /> Members: {oneCommunity.members.length}</p>
-              <DesignIcon name="arrowUp" size={18} />
+            <Link
+              className="community-card"
+              key={oneCommunity._id}
+              to={`/communities/${oneCommunity._id}`}
+              aria-label={`View r/${oneCommunity.name} community`}
+            >
+              <CommunityCover community={oneCommunity} />
+              <div className="community-card-body">
+                <div className="community-card-heading">
+                  <CommunityAvatar community={oneCommunity} />
+                  <h2>r/{oneCommunity.name}</h2>
+                </div>
+                <p className="community-card-description">{oneCommunity.description}</p>
+                <div className="community-card-footer">
+                  <p>
+                    <DesignIcon name="users" size={16} />
+                    {oneCommunity.members.length} {oneCommunity.members.length === 1 ? "member" : "members"}
+                  </p>
+                  <span className="community-card-open">
+                    View community <DesignIcon name="arrow" size={15} />
+                  </span>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
           </div>
         </>

@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import DesignIcon from "./design/DesignIcon";
+import ThemeToggle from "./design/ThemeToggle";
 
 function Navbar({ user, handleLogout, onCreateCommunity }) {
   return (
@@ -7,7 +8,7 @@ function Navbar({ user, handleLogout, onCreateCommunity }) {
       <a className="skip-link" href="#main-content">Skip to content</a>
       <nav className="header-inner" aria-label="Account navigation">
       <Link className="threadly-brand" to="/" aria-label="Threadly homepage">
-        <span className="brand-mark"><DesignIcon name="leaf" size={29} /></span>
+        <span className="brand-mark"><DesignIcon name="message" size={26} /></span>
         <span>threadly<span className="brand-dot">.</span></span>
       </Link>
       <Link className="header-search" to="/communities" aria-label="Browse and search communities">
@@ -17,6 +18,7 @@ function Navbar({ user, handleLogout, onCreateCommunity }) {
       </Link>
       <div className="header-account">
       <span className="header-motto">Find your people.</span>
+      <ThemeToggle />
       <Link className="header-community-link" to="/communities">Communities</Link>
 
       {user ? (

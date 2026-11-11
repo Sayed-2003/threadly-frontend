@@ -1,7 +1,7 @@
 ﻿/* Shared page styles. JavaScript behaviour stays in the existing components. */
 .threadly-page {
   min-width: 0;
-  color: var(--color-text, #293d33);
+  color: var(--color-text);
 }
 
 .threadly-page > h1 {
@@ -20,7 +20,7 @@
 }
 
 .threadly-page > p {
-  color: var(--color-muted, #737f6b);
+  color: var(--color-muted);
   line-height: 1.8;
 }
 
@@ -29,7 +29,7 @@
 }
 
 .threadly-page a:hover {
-  color: #55744b;
+  color: var(--color-accent-text);
 }
 
 
@@ -37,10 +37,10 @@
 .comments-section button {
   min-height: 42px;
   padding: 10px 18px;
-  border: 1px solid var(--color-border, #e0e5d7);
+  border: 1px solid var(--color-border);
   border-radius: 11px;
-  background: var(--color-paper, #fffefa);
-  color: var(--color-green, #294f3e);
+  background: var(--color-paper);
+  color: var(--color-accent-text);
   font-size: 14px;
   font-weight: 600;
   line-height: 1.4;
@@ -48,8 +48,8 @@
 }
 .threadly-page button:hover:not(:disabled),
 .comments-section button:hover:not(:disabled) {
-  border-color: #b9c9aa;
-  background-color: #edf1e5;
+  border-color: var(--color-accent);
+  background-color: var(--color-hover);
 }
 
 .threadly-page button:disabled,
@@ -62,10 +62,10 @@
 .comments-section [role="alert"],
 .threadly-page .error:not(:empty) {
   padding: 12px 16px;
-  border: 1px solid #edc7b7;
+  border: 1px solid var(--color-error-border);
   border-radius: 10px;
-  background: #fff2e9;
-  color: #9b503c;
+  background: var(--color-error-bg);
+  color: var(--color-error-text);
   font-size: 14px;
 }
 
@@ -80,9 +80,9 @@
 .community-details,
 .post-details {
   padding: 32px;
-  border: 1px solid var(--color-border, #e0e5d7);
-  border-radius: 22px;
-  background: var(--color-paper, #fffefa);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-paper);
 }
 
 .auth-page {
@@ -93,7 +93,7 @@
 
 .auth-page > h1 {
   padding-bottom: 22px;
-  border-bottom: 1px solid var(--color-border, #e0e5d7);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .edit-page {
@@ -102,7 +102,7 @@
 
 .edit-page > h2 {
   margin-top: 0;
-  color: #69815a;
+  color: var(--color-accent-text);
   font-size: 18px;
 }
 
@@ -128,7 +128,7 @@
   display: block;
   width: 100%;
   margin: 6px 0 0;
-  color: #56654e;
+  color: var(--color-muted);
   font-size: 13px;
   font-weight: 600;
 }
@@ -144,10 +144,10 @@
   width: 100%;
   min-width: 0;
   padding: 13px 15px;
-  border: 1px solid #dce3d3;
+  border: 1px solid var(--color-border);
   border-radius: 11px;
-  background: #fcfcf8;
-  color: var(--color-text, #293d33);
+  background: var(--color-surface);
+  color: var(--color-text);
   font: inherit;
   font-size: 15px;
   transition: border-color 160ms ease, box-shadow 160ms ease;
@@ -160,8 +160,8 @@
 .threadly-form input:focus,
 .threadly-form textarea:focus,
 .comments-section textarea:focus {
-  border-color: #89a479;
-  box-shadow: 0 0 0 3px #e8eedd;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-focus);
 }
 
 .threadly-form input[type="file"] {
@@ -174,8 +174,8 @@
   padding: 8px 12px;
   border: 0;
   border-radius: 7px;
-  background: #e8eedd;
-  color: #496647;
+  background: var(--color-accent-soft);
+  color: var(--color-accent-text);
   font: inherit;
   cursor: pointer;
 }
@@ -183,7 +183,7 @@
 .threadly-form > p {
   width: 100%;
   margin: 0 0 8px;
-  color: var(--color-muted, #737f6b);
+  color: var(--color-muted);
   font-size: 12px;
 }
 
@@ -193,20 +193,20 @@
 
 .threadly-form button[type="submit"],
 .auth-page form > div:last-child > button:first-child {
-  border-color: var(--color-green, #294f3e);
-  background: var(--color-green, #294f3e);
-  color: #fffefa;
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
 }
 
 .threadly-form button[type="submit"]:hover:not(:disabled),
 .auth-page form > div:last-child > button:first-child:hover:not(:disabled) {
-  border-color: #426b49;
-  background: #426b49;
+  border-color: var(--color-accent-hover);
+  background: var(--color-accent-hover);
 }
 
 .dashboard-page {
   min-height: 240px;
-  background: #eaf0df;
+  background: var(--color-accent-soft);
 }
 
 .dashboard-page > h1 {
@@ -229,10 +229,10 @@
   min-height: 42px;
   margin: 0 8px 12px 0;
   padding: 10px 16px;
-  border: 1px solid #dce3d3;
+  border: 1px solid var(--color-border);
   border-radius: 11px;
-  background: #edf1e5;
-  color: #375d40;
+  background: var(--color-hover);
+  color: var(--color-accent-text);
   font-size: 14px;
   font-weight: 600;
 }
@@ -243,7 +243,7 @@
 
 .community-details > img {
   margin-bottom: 20px;
-  border: 1px solid #dce3d3;
+  border: 1px solid var(--color-border);
 }
 
 .community-details > button {
@@ -252,16 +252,16 @@
 
 .community-details > h2 {
   padding-top: 26px;
-  border-top: 1px solid var(--color-border, #e0e5d7);
+  border-top: 1px solid var(--color-border);
 }
 
 
 .threadly-card {
   min-width: 0;
   padding: 26px;
-  border: 1px solid var(--color-border, #e0e5d7);
+  border: 1px solid var(--color-border);
   border-radius: 18px;
-  background: var(--color-paper, #fffefa);
+  background: var(--color-paper);
 }
 
 .post-card {
@@ -270,12 +270,12 @@
 }
 
 .post-card:hover {
-  border-color: #c6d3ba;
-  box-shadow: 0 6px 22px rgb(41 61 51 / 4%);
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-soft);
 }
 
 .post-card > a:first-child {
-  color: #55764b;
+  color: var(--color-accent-text);
   font-size: 13px;
   font-weight: 600;
 }
@@ -283,13 +283,13 @@
 .post-card .post-author,
 .post-details > p:first-of-type {
   margin: 8px 0 16px;
-  color: #7b8672;
+  color: var(--color-muted);
   font-size: 12px;
 }
 
 .post-card h2 {
   margin: 0 0 12px;
-  color: var(--color-text, #293d33);
+  color: var(--color-text);
   font-size: 23px;
   line-height: 1.35;
   letter-spacing: -0.6px;
@@ -298,7 +298,7 @@
 
 .post-card .post-copy,
 .post-details > p {
-  color: #68745f;
+  color: var(--color-muted);
   line-height: 1.8;
   overflow-wrap: anywhere;
   white-space: pre-wrap;
@@ -325,8 +325,8 @@
   padding: 7px 12px;
   border-color: transparent;
   border-radius: 9px;
-  background-color: #edf1e6;
-  color: #526a48;
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent-text);
   font-size: 12px;
 }
 
@@ -345,7 +345,7 @@
 
 .comments-section {
   padding-top: 26px;
-  border-top: 1px solid var(--color-border, #e0e5d7);
+  border-top: 1px solid var(--color-border);
 }
 
 .comments-section > h2 {
@@ -356,12 +356,12 @@
 
 .comments-section > p,
 .comments-section > form + p {
-  color: #737f6b;
+  color: var(--color-muted);
   font-size: 14px;
 }
 
 .comments-section a {
-  color: #496d45;
+  color: var(--color-accent-text);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -376,34 +376,39 @@
 /* Override original dark inline colours without changing the component logic. */
 .comments-section textarea {
   min-height: 100px;
-  border-color: #dce3d3 !important;
-  background: #fcfcf8 !important;
-  color: #293d33 !important;
+  border-color: var(--color-border) !important;
+  background: var(--color-surface) !important;
+  color: var(--color-text) !important;
   resize: vertical;
 }
 
 .comments-section form > button[type="submit"] {
-  background: #496847;
-  color: #fffefa;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.comments-section form > button[type="submit"]:hover:not(:disabled) {
+  border-color: var(--color-accent-hover);
+  background: var(--color-accent-hover);
 }
 
 .comment-thread {
   min-width: 0;
-  border-left-color: #dce3d3 !important;
+  border-left-color: var(--color-border) !important;
 }
 
 .comment-card {
   padding: 18px !important;
-  border: 1px solid #e0e5d7;
+  border: 1px solid var(--color-border);
   border-radius: 12px !important;
-  background: #f4f6ed !important;
-  color: #53654a !important;
+  background: var(--color-surface) !important;
+  color: var(--color-text) !important;
   overflow-wrap: anywhere;
 }
 
 .comment-card > p:first-child {
   margin-bottom: 8px;
-  color: #365c3e;
+  color: var(--color-text);
   font-size: 13px;
 }
 
@@ -427,7 +432,7 @@
   .community-details,
   .post-details {
     padding: 24px 20px;
-    border-radius: 17px;
+    border-radius: 14px;
   }
 
   .auth-page {
@@ -457,4 +462,13 @@
     max-width: 100%;
   }
 
+}
+
+
+
+
+.vote-buttons button[aria-pressed="true"] {
+  background: var(--color-accent) !important;
+  color: var(--color-on-accent);
+  border-color: var(--color-accent);
 }

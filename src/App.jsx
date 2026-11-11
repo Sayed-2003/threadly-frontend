@@ -42,7 +42,10 @@ function App() {
 
   return (
     <div className="threadly-app">
-     <Toaster position="top-center" />
+     <Toaster position="top-center" toastOptions={{
+       className: "threadly-toast",
+       success: { iconTheme: { primary: "var(--color-accent)", secondary: "var(--color-on-accent)" } },
+     }} />
       <Navbar
         user={user}
         handleLogout={handleLogout}

@@ -98,8 +98,8 @@ function ThreadlyLayout({ children, user, onCreateCommunity }) {
         </section>
 
         <div className="sidebar-footer">
-          <DesignIcon name="leaf" size={22} />
-          <p>A little less scrolling.<br />A little more belonging.</p>
+          <DesignIcon name="message" size={22} />
+          <p>Less noise.<br />More good conversations.</p>
         </div>
       </aside>
 
@@ -107,7 +107,7 @@ function ThreadlyLayout({ children, user, onCreateCommunity }) {
 
       <aside className="threadly-rail" aria-label="Community inspiration">
         <section className="spark-card">
-          <DesignIcon name="sprout" size={30} />
+          <DesignIcon name="bolt" size={30} />
           <h2>A spark starts here.</h2>
           <p>That thing you could talk about for hours? There’s a community for it. Or there could be.</p>
           {user ? (
@@ -121,23 +121,23 @@ function ThreadlyLayout({ children, user, onCreateCommunity }) {
           )}
         </section>
 
-        <section className="growing-section">
+        <section className="highlights-section">
           <div className="rail-section-heading">
-            <h2>Growing together</h2>
-            <DesignIcon name="sprout" size={18} />
+            <h2>Worth a look</h2>
+            <DesignIcon name="bolt" size={18} />
           </div>
-          <p>A few places to put down roots.</p>
-          <div className="growing-list">
+          <p>Your next conversation could be here.</p>
+          <div className="highlights-list">
             {loading && <p className="rail-hint">Finding your people...</p>}
             {error && <p className="rail-hint">{error}</p>}
             {!loading && !error && communities.length === 0 && (
-              <p className="rail-hint">Be the first to plant a little seed.</p>
+              <p className="rail-hint">Start the first conversation.</p>
             )}
             {communities.slice(0, 3).map((community, index) => (
-              <Link className="growing-community" key={community._id} to={`/communities/${community._id}`}>
+              <Link className="highlight-community" key={community._id} to={`/communities/${community._id}`}>
                 <span className="community-number">0{index + 1}</span>
                 <CommunityAvatar community={community} />
-                <span className="growing-community-info">
+                <span className="highlight-community-info">
                   <strong>r/{community.name}</strong>
                   <span>{community.members.length} {community.members.length === 1 ? "member" : "members"}</span>
                 </span>

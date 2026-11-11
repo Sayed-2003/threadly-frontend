@@ -70,6 +70,7 @@ function VoteButtons({ postId, user }) {
       <button
         type="button"
         aria-label="Upvote"
+        aria-pressed={userVote === 1}
         onClick={() => handleVote(1)}
         disabled={!user || submitting}
         style={{ background: userVote === 1 ? "#ff6b35" : "" }}
@@ -82,6 +83,7 @@ function VoteButtons({ postId, user }) {
       <button
         type="button"
         aria-label="Downvote"
+        aria-pressed={userVote === -1}
         onClick={() => handleVote(-1)}
         disabled={!user || submitting}
         style={{ background: userVote === -1 ? "#6b8cff" : "" }}
