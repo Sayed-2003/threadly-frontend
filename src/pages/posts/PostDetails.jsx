@@ -95,7 +95,7 @@ async function confirmDelete() {
 
 
   return (
-    <div>
+    <div className="threadly-page post-details">
       {error && <p role="alert">{error}</p>}
 
       {loading ? (
@@ -130,7 +130,7 @@ async function confirmDelete() {
       )}
 
           {isAuthor && (
-            <div>
+            <div className="threadly-actions">
               {!deleting && (
                 <Link to={`/posts/${postId}/edit`}>
                   Edit Post

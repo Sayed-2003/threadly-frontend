@@ -1,7 +1,7 @@
 
 function Dashboard({ user }) {
   return (
-    <div>
+    <div className="threadly-page dashboard-page">
         <h1>Welcome {user.username}</h1>
     </div>
   )

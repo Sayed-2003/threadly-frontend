@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router";
 import {
   getCommunityById,
@@ -8,6 +8,8 @@ import {
 } from "../../services/communityService";
 import { getPostsByCommunity } from "../../services/postService";
 import PostCard from "../../components/posts/PostCard";
+import CommunityCover from "../../components/design/CommunityCover";
+import CommunityAvatar from "../../components/design/CommunityAvatar";
 import toast from "react-hot-toast";
 
 function CommunityDetails({ user }) {
@@ -174,70 +176,66 @@ function CommunityDetails({ user }) {
   }
 
   return (
-    <div>
+    <div className="threadly-page community-details">
       {error && <p role="alert">{error}</p>}
 
       {loading ? (
         <p>Loading...</p>
       ) : community ? (
         <>
-          <h1>r/{community.name}</h1>
-          {community.imageUrl && (
-            <img
-              src={
-                new URL(
-                  community.imageUrl,
-                  import.meta.env.VITE_BACK_END_SERVER_URL,
-                ).href
-              }
-              alt={`${community.name} community`}
-              style={{
-                width: "200px",
-                height: "200px",
-                objectFit: "cover",
-                borderRadius: "12px",
-              }}
-            />
-          )}
-          <p>{community.description}</p>
-          <p>Members: {community.members.length}</p>
+          <header className="community-profile">
+            <CommunityCover community={community} />
 
-          {user && isMember && (
-            <Link to={`/communities/${communityId}/posts/create`}>
-              Create Post
-            </Link>
-          )}
+            <div className="community-profile-body">
+              <div className="community-profile-identity">
+                <CommunityAvatar community={community} />
+                <div className="community-profile-name">
+                  <h1>r/{community.name}</h1>
+                  <p>Members: {community.members.length}</p>
+                </div>
+              </div>
 
-          {isOwner && (
-            <div>
-              <Link to={`/communities/${communityId}/edit`}>
-                Edit Community
-              </Link>
+              <p className="community-profile-description">{community.description}</p>
 
-              <button
-                type="button"
-                onClick={handleDelete}
-                disabled={submitting}
-              >
-                Delete Community
-              </button>
+              <div className="community-profile-actions">
+                {user && isMember && (
+                  <Link to={`/communities/${communityId}/posts/create`}>
+                    Create Post
+                  </Link>
+                )}
+
+                {isOwner && (
+                  <div className="threadly-actions community-owner-actions">
+                    <Link to={`/communities/${communityId}/edit`}>
+                      Edit Community
+                    </Link>
+
+                    <button
+                      type="button"
+                      onClick={handleDelete}
+                      disabled={submitting}
+                    >
+                      Delete Community
+                    </button>
+                  </div>
+                )}
+
+                {user ? (
+                  isMember ? (
+                    <button type="button" onClick={handleLeave} disabled={submitting}>
+                      {submitting ? "Please wait..." : "Leave Community"}
+                    </button>
+                  ) : (
+                    <button type="button" onClick={handleJoin} disabled={submitting}>
+                      {submitting ? "Please wait..." : "Join Community"}
+                    </button>
+                  )
+                ) : (
+                  <Link to="/sign-in">Sign in to join this community</Link>
+                )}
+              </div>
             </div>
-          )}
-
-          {user ? (
-            isMember ? (
-              <button type="button" onClick={handleLeave} disabled={submitting}>
-                {submitting ? "Please wait..." : "Leave Community"}
-              </button>
-            ) : (
-              <button type="button" onClick={handleJoin} disabled={submitting}>
-                {submitting ? "Please wait..." : "Join Community"}
-              </button>
-            )
-          ) : (
-            <Link to="/sign-in">Sign in to join this community</Link>
-          )}
-
+          </header>
           <h2>Posts</h2>
 
           {postsError && <p role="alert">{postsError}</p>}
@@ -267,3 +265,4 @@ function CommunityDetails({ user }) {
 }
 
 export default CommunityDetails;
+

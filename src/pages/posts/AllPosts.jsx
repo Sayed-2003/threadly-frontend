@@ -25,7 +25,7 @@ function AllPosts({ user }) {
   }, []);
 
   return (
-    <div>
+    <div className="threadly-page feed-page">
       <h1>Home Feed</h1>
 
       {error && <p role="alert">{error}</p>}

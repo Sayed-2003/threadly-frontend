@@ -98,7 +98,7 @@ function EditCommunity({ user }) {
   }, [image]);
 
   return (
-    <div>
+    <div className="threadly-page edit-page">
       <h1>Edit Community</h1>
 
       {error && <p role="alert">{error}</p>}
@@ -107,7 +107,7 @@ function EditCommunity({ user }) {
         <p>Loading...</p>
       ) : community ? (
         isOwner ? (
-          <form onSubmit={handleSubmit}>
+          <form className="threadly-form" onSubmit={handleSubmit}>
             <label htmlFor="name">Name:</label>
             <input
               type="text"

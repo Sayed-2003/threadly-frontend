@@ -79,7 +79,7 @@ function BookmarkButton({ postId, user, onBookmarkRemoved }) {
   }
 
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+    <div className="bookmark-button" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
       <button
         type="button"
         onClick={handleClick}

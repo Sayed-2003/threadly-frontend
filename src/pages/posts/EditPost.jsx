@@ -99,7 +99,7 @@ function EditPost({ user }) {
   }, [image]);
 
   return (
-    <div>
+    <div className="threadly-page edit-page">
       <h1>Edit Post</h1>
 
       {error && <p role="alert">{error}</p>}
@@ -108,7 +108,7 @@ function EditPost({ user }) {
         <p>Loading...</p>
       ) : post ? (
         isAuthor ? (
-          <form onSubmit={handleSubmit}>
+          <form className="threadly-form" onSubmit={handleSubmit}>
             <label htmlFor="title">Title:</label>
             <input
               type="text"
