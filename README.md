@@ -157,11 +157,11 @@ Community creation opens in a modal for signed-in users.
 
 ## Team Members
 
-| Name | GitHub |
-| --- | --- |
-| Sayed Baqer | Comments and upload plus search bar |
-| Ali Kamel | vote and bookmark |
-| Ammar Mohammed | Community and posts and upload |
+| Name | Responsibilities | Github |
+| --- | --- | --- |
+| Sayed Baqer | Comments and upload plus search bar | https://github.com/Sayed-2003 |
+| Ali Kamel | vote and bookmark |     https://github.com/Akhamis1       |
+| Ammar Mohammed | Community and posts and upload |  https://github.com/electricali1 |
 
 ## Credits
 
