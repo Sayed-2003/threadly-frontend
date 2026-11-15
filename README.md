@@ -1,138 +1,166 @@
-# Threadly
+﻿# Threadly Frontend
 
-Find your people. Follow your curiosity.
+## Overview
 
-Threadly is a community discussion app where people can discover shared interests, join communities, and take part in conversations. This repository contains the React frontend, which connects to a separate Express API.
+Threadly is a community discussion app where users discover shared interests, join communities, and take part in conversations. The React frontend connects to a separate backend API.
 
-## Features
+Browse communities and posts without an account. Sign up and sign in to create or join a community, publish posts, comment and reply, vote, and save posts to your bookmarks. Join a community before creating posts or participating in its comments.
 
-- Sign up, sign in, and sign out with JWT authentication.
-- Browse communities and view their posts.
-- Create communities, join or leave them, and manage communities you own.
-- Create, edit, and delete your posts, with support for post images.
-- Add comments and nested replies, and edit or delete your own comments.
-- Upvote and downvote posts.
-- Bookmark posts and revisit them from a dedicated page.
-- Access a personal dashboard.
-- Switch between light and dark themes, with your preference saved locally.
+## Live Application
+
+- **Frontend:** 
+- **Backend API:** For local development, use `http://localhost:3000`.
+- **Backend Repository:** [Threadly Backend](https://github.com/Sayed-2003/threadly-backend)
 
 ## Screenshots
 
-Screenshots will be added here.
+### Home Page
 
-<!--
-Save screenshots in docs/screenshots/ and uncomment these image links when ready.
+Screenshot to be added.
 
-### Home
-![Threadly home page](docs/screenshots/home.png)
+### Feature Page
 
-### Community
-![Community details and posts](docs/screenshots/community.png)
+Community details and posts screenshot to be added.
 
-### Post and comments
-![Post details and threaded comments](docs/screenshots/post.png)
--->
+### Other pages
 
-## Tech stack
+Post details, comments, and bookmarks screenshots to be added.
 
-| Technology | Purpose |
-| --- | --- |
-| React 19 | Components and application state |
-| Vite 8 | Development server and production builds |
-| React Router 7 | Client-side routing |
-| Axios | API requests |
-| React Hot Toast | Notifications and confirmation prompts |
-| CSS | Layout, styling, and themes |
-| ESLint | Code linting |
+## Technologies Used
 
-## Getting started
+- React
+- Vite
+- React Router
+- Axios
+- React Hot Toast
+- CSS
+- ESLint
+
+## Features
+
+- User registration, login, and logout with JWT authentication.
+- Protected routes for the dashboard, bookmarks, and creation and editing pages.
+- Browse, create, join, and leave communities.
+- Edit and delete communities you own.
+- Create posts with images, and edit or delete your own posts.
+- Add comments and nested replies, and edit or delete your own comments.
+- Upvote and downvote posts.
+- Bookmark posts and view saved posts.
+- Personal dashboard.
+- Light and dark themes with a locally saved preference.
+
+## Project Structure
+
+```text
+src/
+├── assets/
+├── components/
+├── design/
+├── pages/
+│   ├── bookmarks/
+│   ├── communities/
+│   └── posts/
+├── services/
+├── App.jsx
+├── index.css
+└── main.jsx
+```
+
+## Getting Started
 
 ### Prerequisites
 
-- A Node.js version supported by the installed Vite release, and npm.
-- A running Threadly backend with its database configured. The frontend needs the API for authentication, communities, posts, and other saved data.
+Install the following before running the project:
 
-### Installation
+- Node.js compatible with Vite 8.
+- npm.
 
-From the frontend repository root (the directory containing this README):
+The [Threadly backend API](https://github.com/Sayed-2003/threadly-backend) must be running with its database configured. The local API URL is `http://localhost:3000`.
 
-```sh
+## Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Sayed-2003/threadly-frontend.git
+cd threadly-frontend
+```
+
+### 2. Install dependencies
+
+```bash
 npm install
 ```
 
-If you are working from the parent project folder, run `cd frontend` first.
+### 3. Create the environment file
 
-### Environment variables
-
-Create a `.env` file in the frontend root:
+Create a `.env` file in the frontend root directory:
 
 ```env
 VITE_BACK_END_SERVER_URL=http://localhost:3000
 ```
 
-Use the base URL of your running backend. The local backend defaults to port `3000`; its routes do not use an `/api` prefix. Restart Vite after changing environment variables.
+Replace this value with your deployed backend URL when needed. Restart the development server after changing it. Configure the backend's `CLIENT_URL` to allow the frontend origin.
 
-Variables prefixed with `VITE_` are exposed to the browser, so keep backend secrets out of this file.
+### 4. Start the development server
 
-### Run locally
-
-```sh
+```bash
 npm run dev
 ```
 
-Open the URL printed in the terminal, usually `http://localhost:5173`. Make sure the backend allows this frontend origin through its CORS configuration (`CLIENT_URL` in the companion backend).
-
-To try the main flow, create an account, sign in, then create or join a community. Community membership is required to create posts and participate in comments and replies.
-
-## Available scripts
-
-| Command | Description |
-| --- | --- |
-| `npm run dev` | Start the Vite development server |
-| `npm run build` | Build the frontend into `dist/` |
-| `npm run preview` | Preview the production build locally |
-| `npm run lint` | Run ESLint |
-
-## Project structure
+Go to:
 
 ```text
-frontend/
-├── public/          # Favicon and theme initialization
-├── src/
-│   ├── assets/      # Shared image assets
-│   ├── components/  # Navigation, layout, communities, posts, comments, and controls
-│   ├── design/      # Styles for layouts, pages, and UI components
-│   ├── pages/       # Authentication, dashboard, communities, posts, and bookmarks
-│   ├── services/    # Axios client and API service functions
-│   ├── App.jsx      # Routes and signed-in user state
-│   ├── index.css    # Main stylesheet
-│   └── main.jsx     # Application entry point
-├── index.html
-├── package.json
-└── vite.config.js
+http://localhost:5173
 ```
 
-## Main routes
+If that port is unavailable, use the URL printed in the terminal.
 
-| Route | Page |
+## Application Routes
+
+| Route | Page | Access |
+| --- | --- | --- |
+| `/` | Home page | Public |
+| `/sign-up` | Registration page | Public |
+| `/sign-in` | Login page | Public |
+| `/dashboard` | Personal dashboard | Authenticated |
+| `/communities` | Community list | Public |
+| `/communities/:communityId` | Community details and posts | Public |
+| `/communities/:communityId/edit` | Edit community | Community owner |
+| `/communities/:communityId/posts/create` | Create post | Authenticated community member |
+| `/posts` | Post feed | Public |
+| `/posts/:postId` | Post details and comments | Public |
+| `/posts/:postId/edit` | Edit post | Post author |
+| `/bookmarks` | Saved posts | Authenticated |
+
+Community creation opens in a modal for signed-in users.
+
+## User Stories
+
+- As a visitor, I want to browse communities and posts so I can discover topics that interest me.
+- As a user, I want to register and sign in so I can participate in discussions.
+- As a user, I want to create and join communities so I can connect with people who share my interests.
+- As a community member, I want to publish posts, comment, and reply so I can contribute to conversations.
+- As a content author, I want to edit or delete my posts and comments so I can manage my contributions.
+- As a community owner, I want to edit or delete my community so I can manage it.
+- As a user, I want to vote on and bookmark posts so I can highlight useful discussions and revisit them.
+- As a user, I want to switch themes so I can choose a comfortable appearance.
+
+## Future Enhancements
+
+- Search and filtering for communities and posts.
+- User profiles with activity history.
+- Notifications for replies and community activity.
+- Community moderation tools.
+
+## Team Members
+
+| Name | GitHub |
 | --- | --- |
-| `/` | Home |
-| `/sign-up` | Create an account |
-| `/sign-in` | Sign in |
-| `/dashboard` | Personal dashboard |
-| `/communities` | Browse communities |
-| `/communities/:communityId` | Community details and posts |
-| `/communities/:communityId/edit` | Edit a community |
-| `/communities/:communityId/posts/create` | Create a community post |
-| `/posts` | Post feed |
-| `/posts/:postId` | Post details and comments |
-| `/posts/:postId/edit` | Edit a post |
-| `/bookmarks` | Saved posts |
+| To be added | To be added |
 
-The dashboard, bookmarks, and creation/editing routes require sign-in. Community creation opens in a modal from the navigation or layout controls.
+## Credits
 
-## Deployment
-
-Set `VITE_BACK_END_SERVER_URL` to your deployed backend URL before running `npm run build`, then publish the generated `dist/` directory. Vite embeds the API URL at build time, so rebuild after changing it.
-
-Configure your hosting provider to serve `index.html` for client-side routes so that refreshing a page such as `/communities/123` works. Update the backend's allowed frontend origin to match your deployed site.
+- [React](https://react.dev/), [Vite](https://vite.dev/), and [React Router](https://reactrouter.com/) for the frontend foundation.
+- [Axios](https://axios-http.com/) for API requests.
+- [React Hot Toast](https://react-hot-toast.com/) for notifications.
