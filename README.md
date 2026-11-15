@@ -16,15 +16,17 @@ Browse communities and posts without an account. Sign up and sign in to create o
 
 ### Home Page
 
-Screenshot to be added.
+![Threadly home page](<assets/readme-pic/homepage- threadly.png>)
 
 ### Feature Page
 
-Community details and posts screenshot to be added.
+![Threadly community details and posts](assets/readme-pic/community-detail-threadly.png)
 
 ### Other pages
 
-Post details, comments, and bookmarks screenshots to be added.
+![Threadly post details and comments](assets/readme-pic/threadly-post.png)
+
+![Threadly bookmarks page](assets/readme-pic/threadly-bookmark.png)
 
 ## Technologies Used
 
@@ -157,7 +159,9 @@ Community creation opens in a modal for signed-in users.
 
 | Name | GitHub |
 | --- | --- |
-| To be added | To be added |
+| Sayed Baqer | Comments and upload plus search bar |
+| Ali Kamel | vote and bookmark |
+| Ammar Mohammed | Community and posts and upload |
 
 ## Credits
 
