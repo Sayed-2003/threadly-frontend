@@ -8,8 +8,8 @@ Browse communities and posts without an account. Sign up and sign in to create o
 
 ## Live Application
 
-- **Frontend:** 
-- **Backend API:** For local development, use `http://localhost:3000`.
+- **Frontend:** [threadly live application](https://threadly-bh.netlify.app/)
+- **Backend API:** [threadly live backend](https://threadly-backend-0sk3.onrender.com/)
 - **Backend Repository:** [Threadly Backend](https://github.com/Sayed-2003/threadly-backend)
 
 ## Screenshots
